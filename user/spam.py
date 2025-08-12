@@ -26,4 +26,4 @@ async def spam_handle(client, event):
   
   for i in range(times):
     await event.respond(f"{value}")
-    
+    await asyncio.sleep(0.1)
