@@ -26,13 +26,30 @@ async def help_handle(client, event):
 
 
 
-
 def format_commands(cmd: dict) -> str:
     if not cmd:
         return ""
-    result = ""
+    
+    lines_count = len(cmd)
+    
+    # Define fixed width for box content (adjust as needed)
+    box_width = 20
+    
+    # Top border
+    result = "╔" + "═" * box_width + "╗\n"
+    
+    # Format each line
     for key, desc in cmd.items():
-        result += f"//{key} : {desc}\n"
+        key_part = f"//{key}"
+        # max length of key part + 3 spaces for separator + desc
+        # left align key_part to 12 chars, desc to fill rest
+        key_str = key_part.ljust(12)
+        desc_str = desc.ljust(box_width - 3 - 12)
+        result += f"║ {key_str}: {desc_str} \n"
+    
+    # Bottom border
+    result += "╚" + "═" * box_width + "╝"
+    
     return result
     
 
