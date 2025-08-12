@@ -13,8 +13,14 @@ from user.brain import brain_handle
 from user.wtf import wtf_handle
 from user.bomb import bomb_handle
 from bot.ping import ping_handle
+from user.help import help_handle
+
 
 def register(client):
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//help(?:\s+(.*))?$'))
+  async def help(event):
+    await help_handle(client, event)
+  
   @client.on(events.NewMessage(outgoing=True, pattern=r'^//ping(?:\s+(.*))?$'))
   async def ping(event):
     await ping_handle(client, event)
