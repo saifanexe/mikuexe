@@ -110,7 +110,7 @@ import requests
 from config import FIREBASE
 
 def upload_commands(data):
-    url = f"{FIREBASE}/userbot/commands.json"   # / zaroori hai yahan
+    url = f"{FIREBASE}/commands.json"   # / zaroori hai yahan
     try:
         response = requests.patch(url, json=data)   # patch use kiya
         if response.status_code == 200:
