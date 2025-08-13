@@ -22,11 +22,11 @@ async def lover_handle(client, event):
     if i == 10:
       for s in f:
         await event.edit(f"{s}")
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(1)
     elif i == 20:
       for s in b:
         await event.edit(f"{s}")
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(1)
     else:
       await event.edit(text+space)
     
