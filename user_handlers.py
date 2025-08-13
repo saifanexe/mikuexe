@@ -15,12 +15,61 @@ from user.bomb import bomb_handle
 from bot.ping import ping_handle
 from user.help import help_handle
 
+from user.ban import ban_handle, unban_handle
+from user.mute import mute_handle, unmute_handle
+from user.update_profile import setname, setbio, setpfp
+from user.chat_info import get_admins, tag_admins
+from user.clone import clone_user, revert_user
 
 def register(client):
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//revert(?:\s+(.*))?$'))
+  async def revertusers_handle(event):
+    await revert_user(client, event)
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//clone(?:\s+(.*))?$'))
+  async def cloneusers_handle(event):
+    await clone_user(client, event)
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^@admins(?:\s+(.*))?$'))
+  async def tagadmins_handle(event):
+    await tag_admins(client, event)
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//admins(?:\s+(.*))?$'))
+  async def admins_handle(event):
+    await get_admins(client, event)
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//setpfp(?:\s+(.*))?$'))
+  async def setpfp_handle(event):
+    await setpfp(client, event) 
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//setbio(?:\s+(.*))?$'))
+  async def setbio_handle(event):
+    await setbio(client, event) 
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//setname(?:\s+(.*))?$'))
+  async def setname_handle(event):
+    await setname(client, event) 
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//unmute(?:\s+(.*))?$'))
+  async def unmute(event):
+    await unmute_handle(client, event)  
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//mute(?:\s+(.*))?$'))
+  async def mute(event):
+    await mute_handle(client, event)  
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//unban(?:\s+(.*))?$'))
+  async def unban(event):
+    await unban_handle(client, event)
+    
+  @client.on(events.NewMessage(outgoing=True, pattern=r'^//ban(?:\s+(.*))?$'))
+  async def ban(event):
+    await ban_handle(client, event)
+    
   @client.on(events.NewMessage(outgoing=True, pattern=r'^//help(?:\s+(.*))?$'))
   async def help(event):
     await help_handle(client, event)
-  
+    
   @client.on(events.NewMessage(outgoing=True, pattern=r'^//ping(?:\s+(.*))?$'))
   async def ping(event):
     await ping_handle(client, event)
