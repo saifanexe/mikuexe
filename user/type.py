@@ -22,6 +22,7 @@ async def type_handle(client, event):
   text = value
   for i in range(1, len(value)):
     await event.edit(text[:i] + cursor)
+    await asyncio.sleep(0.5)
   await event.edit(text)
   
   
